@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import androidx.cardview.widget.CardView
+import android.graphics.Color
 
 class ActivityTypeAdapter(
     private val items: List<ActivityType>,
@@ -26,6 +28,12 @@ class ActivityTypeAdapter(
         val item = items[position]
         holder.name.text = item.name
         holder.itemView.isSelected = position == selectedPosition
+        val cardView = holder.itemView as CardView
+        if (position == selectedPosition) {
+            cardView.setCardBackgroundColor(Color.parseColor("#FFBB86FC")) // фиолетовый
+        } else {
+            cardView.setCardBackgroundColor(Color.WHITE)
+        }
         holder.itemView.setOnClickListener {
             val prev = selectedPosition
             selectedPosition = position

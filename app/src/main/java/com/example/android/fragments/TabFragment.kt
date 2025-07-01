@@ -5,71 +5,61 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.android.ActivityAdapter
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.android.R
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
+import androidx.viewpager2.widget.ViewPager2
 
 class TabFragment : Fragment() {
-    private lateinit var recyclerView: RecyclerView
-
-    companion object {
-        private const val ARG_TAB_TYPE = "tab_type"
-
-        fun newInstance(tabType: String): TabFragment {
-            val fragment = TabFragment()
-            val args = Bundle()
-            args.putString(ARG_TAB_TYPE, tabType)
-            fragment.arguments = args
-            return fragment
-        }
-    }
+    private val tabTitles = listOf("Мои", "Пользователей")
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         return inflater.inflate(R.layout.fragment_tab, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        recyclerView = view.findViewById(R.id.recycler_view)
-        recyclerView.layoutManager = LinearLayoutManager(context)
-
-        val tabType = arguments?.getString(ARG_TAB_TYPE) ?: ""
-        val adapter = ActivityAdapter(tabType, this::onActivityClicked)
-        recyclerView.adapter = adapter
-
-        val data = when (tabType) {
-            "Мои" -> loadMyActivities()
-            "Пользователей" -> loadUsersActivities()
-            else -> emptyList()
+        val tabLayout = view.findViewById<TabLayout>(R.id.tab_layout)
+        val viewPager = view.findViewById<ViewPager2>(R.id.view_pager)
+        viewPager.adapter = object : FragmentStateAdapter(this) {
+            override fun getItemCount() = 2
+            override fun createFragment(position: Int): Fragment {
+                return when (position) {
+                    0 -> MyActivitiesFragment()
+                    1 -> UsersActivitiesFragment()
+                    else -> throw IllegalArgumentException()
+                }
+            }
         }
-
-        adapter.submitList(data)
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+            tab.text = tabTitles[position]
+        }.attach()
     }
 
-    private fun loadMyActivities(): List<ActivityAdapter.ActivityItem> {
-        return listOf(
-            ActivityAdapter.ActivityItem.DateSection("Вчера"),
-            ActivityAdapter.ActivityItem.Activity("14 часов назад", "Серфинг", "14.32 км", "2 часа 46 минут", "")
-        )
+    companion object {
+        fun newInstance(tabType: String): TabFragment {
+            val fragment = TabFragment()
+            val args = Bundle()
+            args.putString("tab_type", tabType)
+            fragment.arguments = args
+            return fragment
+        }
     }
-    private fun loadUsersActivities(): List<ActivityAdapter.ActivityItem> {
-        return listOf(
-            ActivityAdapter.ActivityItem.DateSection("Май 2022 года"),
-            ActivityAdapter.ActivityItem.Activity("29.05.2022", "Велосипед", "1 км", "1 час", "morgen")
-        )
-    }
+}
 
-    private fun onActivityClicked(activity: ActivityAdapter.ActivityItem.Activity) {
-        val fragment = ActivityDetailFragment.newInstance(activity)
-        requireActivity().supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, fragment)
-            .addToBackStack(null)
-            .commit()
+class UsersActivitiesFragment : Fragment() {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Здесь можно реализовать отображение активностей других пользователей
+        val view = inflater.inflate(android.R.layout.simple_list_item_1, container, false)
+        return view
     }
 }

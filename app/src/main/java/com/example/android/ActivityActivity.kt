@@ -4,9 +4,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentContainerView
-import com.example.android.fragments.ActivityFragment
 import com.example.android.fragments.ProfileFragment
 import com.example.android.fragments.NewActivityFragment
+import com.example.android.fragments.ActivityInProgressFragment
+import com.example.android.fragments.TabFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
@@ -32,19 +33,19 @@ class ActivityActivity : AppCompatActivity() {
 
         supportFragmentManager.addOnBackStackChangedListener {
             val fragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
-            fabNewActivity.visibility = if (fragment is NewActivityFragment) View.GONE else View.VISIBLE
+            fabNewActivity.visibility = if (fragment is NewActivityFragment || fragment is ActivityInProgressFragment) View.GONE else View.VISIBLE
         }
 
         if (savedInstanceState == null) {
             // Первоначальная загрузка фрагмента активности
             supportFragmentManager.beginTransaction()
-                .add(R.id.fragment_container, ActivityFragment(), ActivityFragment.TAG)
+                .add(R.id.fragment_container, TabFragment(), "TabFragment")
                 .commit()
         }
 
         bottomNav.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.activityFragment -> switchToFragment(ActivityFragment.TAG)
+                R.id.activityFragment -> switchToFragment("TabFragment")
                 R.id.profileFragment -> switchToFragment(ProfileFragment.TAG)
             }
             true
@@ -62,7 +63,7 @@ class ActivityActivity : AppCompatActivity() {
             transaction.show(fragment)
         } else {
             val newFragment = when (tag) {
-                ActivityFragment.TAG -> ActivityFragment()
+                "TabFragment" -> TabFragment()
                 ProfileFragment.TAG -> ProfileFragment()
                 else -> throw IllegalArgumentException("Unknown fragment tag")
             }
