@@ -48,9 +48,9 @@ class ViewPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            0 -> TabFragment.newInstance("Время потренить")
-            1 -> TabFragment.newInstance("Время потренить")
-            else -> throw IllegalArgumentException()
+            0 -> TabFragment.newInstance("Мои")
+            1 -> TabFragment.newInstance("Пользователей")
+            else -> throw IllegalArgumentException("Invalid position")
         }
     }
 }

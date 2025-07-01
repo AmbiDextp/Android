@@ -15,11 +15,12 @@ class ActivityAdapter(
 
     sealed class ActivityItem {
         data class DateSection(val date: String) : ActivityItem()
-        data class Activity(
+        data class  Activity(
             val ago: String,
             val title: String,
             val distance: String,
-            val duration: String
+            val duration: String,
+            val author: String
         ) : ActivityItem()
     }
 
@@ -90,13 +91,14 @@ class ActivityViewHolder(
     private val agoText: TextView = view.findViewById(R.id.ago_text)
     private val durationText: TextView = view.findViewById(R.id.duration_text)
     private val distanceText: TextView = view.findViewById(R.id.distance_text)
+    private val authorText: TextView = view.findViewById(R.id.author_text)
 
     fun bind(item: ActivityAdapter.ActivityItem.Activity, tabType: String) {
         titleText.text = item.title
         agoText.text = item.ago
         durationText.text = item.duration
         distanceText.text = item.distance
-
+        authorText.text = if (tabType == "Мои") "" else "@${item.author}"
         itemView.setOnClickListener { onActivityClick(item) }
     }
 }

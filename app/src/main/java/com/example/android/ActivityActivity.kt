@@ -7,6 +7,8 @@ import com.example.android.fragments.ActivityFragment
 import com.example.android.fragments.ProfileFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
+
+
 class ActivityActivity : AppCompatActivity() {
     private lateinit var bottomNav: BottomNavigationView
     private lateinit var fragmentContainer: FragmentContainerView

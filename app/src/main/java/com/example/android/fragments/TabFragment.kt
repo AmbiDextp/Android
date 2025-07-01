@@ -43,20 +43,31 @@ class TabFragment : Fragment() {
         val adapter = ActivityAdapter(tabType, this::onActivityClicked)
         recyclerView.adapter = adapter
 
-        // Here you would normally load your data from a ViewModel or other source
-        val sampleData = listOf(
-            ActivityAdapter.ActivityItem.DateSection("Вчера"),
-            ActivityAdapter.ActivityItem.Activity("14 часов назад", "Серфинг", "14.32 км", "2 часа 46 минут"),
-            ActivityAdapter.ActivityItem.DateSection("Май 2022 года"),
-            ActivityAdapter.ActivityItem.Activity("29.05.2022", "Велосипед", "1 км", "1 час")
-        )
+        val data = when (tabType) {
+            "Мои" -> loadMyActivities()
+            "Пользователей" -> loadUsersActivities()
+            else -> emptyList()
+        }
 
-        adapter.submitList(sampleData)
+        adapter.submitList(data)
+    }
+
+    private fun loadMyActivities(): List<ActivityAdapter.ActivityItem> {
+        return listOf(
+            ActivityAdapter.ActivityItem.DateSection("Вчера"),
+            ActivityAdapter.ActivityItem.Activity("14 часов назад", "Серфинг", "14.32 км", "2 часа 46 минут", "")
+        )
+    }
+    private fun loadUsersActivities(): List<ActivityAdapter.ActivityItem> {
+        return listOf(
+            ActivityAdapter.ActivityItem.DateSection("Май 2022 года"),
+            ActivityAdapter.ActivityItem.Activity("29.05.2022", "Велосипед", "1 км", "1 час", "morgen")
+        )
     }
 
     private fun onActivityClicked(activity: ActivityAdapter.ActivityItem.Activity) {
         val fragment = ActivityDetailFragment.newInstance(activity)
-        parentFragmentManager.beginTransaction()
+        requireActivity().supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, fragment)
             .addToBackStack(null)
             .commit()
