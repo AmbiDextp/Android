@@ -5,26 +5,81 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="173dp"
-        android:layout_height="119dp"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.532"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.223" />
 
     <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="147dp"
-        android:layout_height="179dp"
-        app:srcCompat="@android:drawable/btn_star_big_on"
-        tools:layout_editor_absoluteX="140dp"
-        tools:layout_editor_absoluteY="332dp"
-        tools:ignore="MissingConstraints" />
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="104dp"
+        android:importantForAccessibility="no"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_registration_bicycles" />
 
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="36dp"
+        android:layout_marginTop="44dp"
+        android:fontFamily="sans-serif"
+        android:gravity="center"
+        android:lineSpacingExtra="4sp"
+        android:text="Пожалуй, лучший фитнес трекер в ДВФУ"
+        android:textColor="@android:color/black"
+        android:textSize="35sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageView" />
+
+    <TextView
+        android:id="@+id/subtitleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:fontFamily="sans-serif"
+        android:gravity="center"
+        android:text="Созданный студентами"
+        android:textColor="@android:color/darker_gray"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/titleText" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/registerButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="sans-serif"
+        android:padding="12dp"
+        android:text="Зарегистрироваться"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        app:backgroundTint="@color/purple_500"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/subtitleText" />
+
+    <TextView
+        android:id="@+id/loginClickText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="sans-serif"
+        android:textStyle="bold"
+        android:clickable="true"
+        android:text="Уже есть аккаунт?"
+        android:textColor="@color/purple_500"
+        android:textSize="16sp"
+        app:backgroundTint="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/registerButton"
+        app:rippleColor="@android:color/transparent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

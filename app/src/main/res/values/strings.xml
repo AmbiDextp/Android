@@ -1,4 +1,10 @@
 <resources>
-    <string name="app_name">Android</string>
-    <string name="lox_poganiy">LOX POGANIY</string>
+    <string name="app_name">AppName</string>
+    <string name="agreement">
+        Нажимая на кнопку, вы соглашаетесь с
+        <a href="#">политикой конфиденциальности</a>
+        и <a href="#">обработкой персональных данных</a>
+        , а также принимаете
+        <a href="#">пользовательское соглашение</a>.
+    </string>
 </resources>
