@@ -1,12 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#fff">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+        <TextView
+            android:id="@+id/profile_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Профиль"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/black"/>
+        <TextView
+            android:id="@+id/profile_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Сохранить"
+            android:textColor="@color/purple_500"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:padding="8dp"
+            android:clickable="true"
+            android:focusable="true"/>
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/profile_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Логин"
+        android:layout_marginTop="32dp"
+        android:background="@color/white"
+        android:padding="12dp"
+        android:textColor="@color/black"/>
+
+    <EditText
+        android:id="@+id/profile_nickname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Имя или никнейм"
+        android:layout_marginTop="8dp"
+        android:background="@color/white"
+        android:padding="12dp"
+        android:textColor="@color/black"/>
 
     <TextView
-        android:id="@+id/text_view"
+        android:id="@+id/profile_change_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:textSize="18sp" />
-</FrameLayout>
+        android:text="Изменить пароль"
+        android:textColor="@color/purple_500"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:clickable="true"
+        android:focusable="true"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <Button
+        android:id="@+id/profile_logout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Выйти"
+        android:textColor="#fff"
+        android:backgroundTint="#B00020"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"/>
+</LinearLayout>

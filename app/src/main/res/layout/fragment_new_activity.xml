@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Пустое View для карты -->
+    <View
+        android:id="@+id/map_placeholder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#E5E5E5" />
+
+    <!-- Верхняя панель -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingTop="32dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:layout_gravity="top">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="NewActivity"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="center"/>
+        <View
+            android:layout_width="40dp"
+            android:layout_height="40dp"/>
+    </LinearLayout>
+
+    <!-- Нижняя карточка -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Погнали? :)"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:textColor="@color/black"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="16dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/activity_type_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="64dp"
+                android:orientation="horizontal"
+                android:layout_marginBottom="24dp"/>
+
+            <Button
+                android:id="@+id/start_activity_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Начать"
+                android:textColor="@android:color/white"
+                android:backgroundTint="@color/purple_500"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:background="@drawable/rounded_button_bg"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</FrameLayout> 

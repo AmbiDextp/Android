@@ -1,10 +1,12 @@
 package com.example.android
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentContainerView
 import com.example.android.fragments.ActivityFragment
 import com.example.android.fragments.ProfileFragment
+import com.example.android.fragments.NewActivityFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
@@ -19,6 +21,19 @@ class ActivityActivity : AppCompatActivity() {
 
         bottomNav = findViewById(R.id.bottom_nav)
         fragmentContainer = findViewById(R.id.fragment_container)
+        val fabNewActivity = findViewById<com.google.android.material.floatingactionbutton.FloatingActionButton>(R.id.fab_new_activity)
+
+        fabNewActivity.setOnClickListener {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, NewActivityFragment.newInstance(), NewActivityFragment.TAG)
+                .addToBackStack(null)
+                .commit()
+        }
+
+        supportFragmentManager.addOnBackStackChangedListener {
+            val fragment = supportFragmentManager.findFragmentById(R.id.fragment_container)
+            fabNewActivity.visibility = if (fragment is NewActivityFragment) View.GONE else View.VISIBLE
+        }
 
         if (savedInstanceState == null) {
             // Первоначальная загрузка фрагмента активности
